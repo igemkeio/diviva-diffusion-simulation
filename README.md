@@ -106,7 +106,7 @@ python ../figure_code/fig_occupancy_gif.py  # θ = 0.659（左右比 5 倍）の
 ```bash
 cd cycle4_calibration/code
 python forward.py                      # 前向きモデル（投影 → PSF → 画素）の自己診断
-python cycle5.py                       # 本文の数値をまとめて再計算 ⚠️ 下の「既知の問題」を参照
+python cycle5.py                       # 本文の数値をまとめて再計算（約 1 分）。出力例は outputs/results5_out.txt
 python final_p.py                      # 成長の次数 p の推定（α = 1.076 ± 0.061）
 python s1s2_curves.py                  # fig_s1s2.py が読む figures/_s1s2_curves.json を作る
 python ../figure_code/fig_model_vs_image.py   # 模擬画像と実画像の比較
@@ -141,14 +141,23 @@ python ../figure_code/fig_agreement.py        # 較正前後の一致度（48% �
 ## データ
 
 `cycle4_calibration/data/` に解析済みの表と、図に使う生画像を 2 枚だけ置いてある。
-撮像と細胞ごとの輝度抽出は別リポジトリ（[ecoli-imaging](https://github.com/igemkeio/ecoli-imaging)）
-で行っており、ここにあるのはその出力である。出どころと md5 は `data/SOURCES.md` を参照。
+wet 側の画像解析はこのリポジトリでは行っておらず、次の 2 つのリポジトリの解析結果を使っている。
+
+| リポジトリ | 使ったもの |
+| --- | --- |
+| [igemkeio/ecoli-imaging](https://github.com/igemkeio/ecoli-imaging) | 位相差・蛍光画像からの細胞の切り出しと、チャネル間のずれの補正 |
+| [igemkeio/DivIVA-anl](https://github.com/igemkeio/DivIVA-anl) | 長軸方向の線プロファイル、細胞ごとの指標、遊離 FP（null）との比較 |
+
+`data/` の CSV は DivIVA-anl の解析（作業時のフォルダ名 `anl/`）の出力をコピーしたもの。
+出どころと md5 は `data/SOURCES.md` を参照。
 
 | ファイル | 中身 |
 | --- | --- |
 | `cells_final_w5.csv` | 細胞ごとの線プロファイル（線幅 5 px）と指標。1643 細胞 |
 | `cells_integrated.csv` | ROI の座標・細胞長・SNR など、切り出しに要る情報 |
 | `cells_profiles_wide_w3.csv` | 同じものを線幅 3 px で取ったもの（線幅依存の検証用） |
+| `profiles_w3.csv` | 線幅 3 px のプロファイル（1 画素 1 行の long 形式）。`cycle5.py` が読む |
+| `q2_cells.csv` | DivIVA-anl の問い 2 の細胞ごとの値。`cycle5.py` が読む |
 | `pool_features.csv` | 手選び前の母集団の特徴量（選択バイアスの確認用） |
 | `1010_mc_Div/5/5aa.tif` | DivIVA-mCherry（IPTG 10 µM）の生画像 |
 | `1010_FPnull/mche/mche4.tif` | 遊離 mCherry（局在しない対照）の生画像 |
@@ -181,12 +190,8 @@ $\rho$, $\rho_n$, $k_{on}$, $k_{grow}$ は**独立なパラメータではない
 
 ## 既知の問題
 
-- **`cycle5.py` はこのリポジトリのデータだけでは動かない。**`wetdata.py` が
-  `anl/extracted/profiles_w3.csv`（1 画素 1 行の long 形式）を読むが、`data/` に
-  入っているのは 1 細胞 1 行の wide 形式（`cells_profiles_wide_w3.csv`）である。
-  `WET_DIR` に元の `anl/` を指すか、long 形式の csv を `data/` に足す必要がある
-- **`cycle4_calibration/outputs/` が空である。**Cycle 4 の数値は標準出力にしか
-  残っていない。`python cycle5.py > ../outputs/results5_out.txt` のように保存すること
+- `cycle5.py` は既定で `data/` を読む。環境変数 `WET_DIR` に DivIVA-anl の出力
+  ディレクトリ（`extracted/` と `results/` を含むもの）を指すと、そちらを読む
 - `fit_R_short_axis.py` は末尾の保存処理の括弧が壊れていたので直した（2026-10-21）。
   印字される短軸フィットの値（R と PSF）は変わらない
 

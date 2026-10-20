@@ -1,22 +1,29 @@
-"""Wet（anl/）の線プロファイルを読み、Cycle 5 のモデル比較用にそろえる。
+"""Wet（DivIVA-anl）の線プロファイルを読み、Cycle 5 のモデル比較用にそろえる。
 
     wet 側の生成物を読むだけで、wet の解析はやり直さない。
-    ⚠️ 指標の定義は forward.py（= anl/scripts/metrics.py）と同一。
+    ⚠️ 指標の定義は forward.py（= DivIVA-anl の anl/scripts/metrics.py）と同一。
 """
 
 import os
 import numpy as np
 import pandas as pd
 
-WET = os.environ.get(
-    "WET_DIR", "/mnt/user-data/uploads/Igem数値解析/anl")
+# 既定はこのリポジトリの cycle4_calibration/data/（ファイルを平置き）。
+# 環境変数 WET_DIR を与えたときは DivIVA-anl の出力ディレクトリ（extracted/, results/）を読む。
+_DATA = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
+WET = os.environ.get("WET_DIR")
+
+
+def wet_path(sub, name):
+    """WET_DIR があれば WET_DIR/sub/name、無ければ data/name。"""
+    return os.path.join(WET, sub, name) if WET else os.path.join(_DATA, name)
 PX_UM = 0.1625
 
 
 def load():
     """profiles_w3 と cells_integrated を結合して返す。"""
-    pr = pd.read_csv(os.path.join(WET, "extracted", "profiles_w3.csv"))
-    ci = pd.read_csv(os.path.join(WET, "results", "cells_integrated.csv"))
+    pr = pd.read_csv(wet_path("extracted", "profiles_w3.csv"))
+    ci = pd.read_csv(wet_path("results", "cells_integrated.csv"))
     return pr, ci
 
 

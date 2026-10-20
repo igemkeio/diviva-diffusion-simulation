@@ -238,7 +238,7 @@ def s3_validate(flat):
 def s4_p():
     hdr("4. ★ 成長の次数 p — 実測の発現量依存から決める")
     import pandas as pd
-    q = pd.read_csv(W.os.path.join(W.WET, "results", "q2_cells.csv"))
+    q = pd.read_csv(W.wet_path("results", "q2_cells.csv"))
 
     def fit_p(df, b, nq=5):
         rows = []
