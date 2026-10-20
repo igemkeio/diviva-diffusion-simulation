@@ -7,8 +7,6 @@ DATA  = _os.path.join(ROOT, 'data')
 FIGS  = _os.path.join(ROOT, 'figures')
 if _HERE not in _sys.path: _sys.path.insert(0, _HERE)        # forward.py, cluster.py
 # ---------------------------------------------------------------------------
-import sys
-sys.path.insert(0,'/tmp/claude-0/-home-claude/4e18436e-3aed-52d9-9db2-d45c28c0591d/scratchpad')
 import numpy as np
 import pooled_p as M   # reuses d, alpha, model_em, bnull, p_of, L
 d, alpha, p_of = M.d, M.alpha, M.p_of

@@ -14,7 +14,8 @@ shot.py           HTML → PNG（Playwright + Chromium、device_scale_factor=2�
 
 ```bash
 pip install playwright && playwright install chromium
-python shot.py fig_roadmap.png          # shot.py 内の goto() のパスを見る対象に合わせる
+python shot.py fig_roadmap.png                       # 英語版（roadmap.html）
+python shot.py fig_roadmap_ja.png roadmap_ja.html    # 日本語版
 ```
 
 出力は 4480 × 約 1670 px（CSS 2240 px の 2 倍）。
