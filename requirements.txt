@@ -1,0 +1,10 @@
+# Python 3.10+
+numpy>=1.24
+scipy>=1.10
+matplotlib>=3.7
+pandas>=2.0             # cycle4 のみ（wetdata.py の csv 読み込み）
+tifffile>=2023.7.10     # cycle4 のみ（生 tif の読み込み）
+pillow>=10.0            # GIF の書き出し
+
+# wiki_figures/roadmap/ のロードマップ図を作り直すときだけ
+# playwright>=1.40      （インストール後に `playwright install chromium`）

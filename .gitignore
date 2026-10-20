@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.DS_Store
+# 図は再生成できるので追跡しない（cycle4/figures は空ディレクトリとして置く）
+*.png
+*.gif
+*.pdf
+!docs/*.png

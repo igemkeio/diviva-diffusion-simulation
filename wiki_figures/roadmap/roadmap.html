@@ -1,0 +1,160 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<style>
+  :root{
+    --c1:#b5485c; --c2:#1f4e79; --c3:#d8921f; --c4:#8a5a12; --wet:#2f7d5f;
+    --ink:#1a1a1a; --mute:#6b6b6b; --line:#9a9a9a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Inter,"Helvetica Neue",Arial,sans-serif;background:#fff;
+       color:var(--ink);padding:34px 38px 30px;width:2240px}
+  h1{font-size:25px;font-weight:700;letter-spacing:-.2px}
+  .sub{font-size:14.5px;color:var(--mute);margin-top:7px}
+  .row{display:flex;align-items:stretch;gap:0;margin-top:11px;margin-bottom:0;width:1824px}
+  .card{flex:0 0 343.5px;position:relative;border:2.5px solid;border-radius:11px;padding:19px 21px 21px;
+        display:flex;flex-direction:column;min-height:470px}
+  .tag{font-size:12.5px;font-weight:700;letter-spacing:1.1px}
+  .ttl{font-size:21px;font-weight:700;margin-top:9px;line-height:1.25}
+  .lbl{font-size:11.5px;font-weight:700;color:var(--mute);letter-spacing:1.1px;margin-top:22px}
+  .txt{font-size:14.5px;line-height:1.55;margin-top:7px}
+  .learn{margin-top:auto;border-radius:8px;padding:13px 15px}
+  .learn .lbl{margin-top:0}
+  .learn .txt{margin-top:8px}
+  .arrow{flex:0 0 150px;display:flex;flex-direction:column;align-items:center;
+         justify-content:center;gap:9px;padding:0 6px}
+  .arrow .cap{font-size:12.5px;color:var(--mute);text-align:center;line-height:1.4}
+  .shaft{width:100%;height:0;border-top:1.6px solid var(--line);position:relative}
+  .shaft:after{content:"";position:absolute;right:-1px;top:-5px;
+    border-left:9px solid var(--line);border-top:5px solid transparent;
+    border-bottom:5px solid transparent}
+  .c1{border-color:var(--c1)} .c1 .tag,.c1 .ttl{color:var(--c1)}
+  .c2{border-color:var(--c2)} .c2 .tag,.c2 .ttl{color:var(--c2)}
+  .c3{border-color:var(--c3)} .c3 .tag,.c3 .ttl{color:var(--c3)}
+  .c4{border-color:var(--c4)} .c4 .tag,.c4 .ttl{color:var(--c4)}
+  .l1{background:#fbeef0} .l1 .lbl{color:var(--c1)}
+  .l2{background:#eaf1f8} .l2 .lbl{color:var(--c2)}
+  .l3{background:#fdf2dd} .l3 .lbl{color:var(--c3)}
+  .l4{background:#fbf0dc} .l4 .lbl{color:var(--c4)}
+  .lanewrap{display:flex;margin-top:0}
+  .lanegap{flex:0 0 987px;display:flex;flex-direction:column}
+  .wetlbl{margin-top:90px;min-height:92px;display:flex;align-items:center;
+          justify-content:flex-end;gap:14px;padding-right:18px}
+  .wetlbl .t{font-size:15px;font-weight:700;letter-spacing:1.4px;color:var(--wet);
+             white-space:nowrap}
+  .wetlbl .r{width:46px;height:0;border-top:2px solid var(--wet)}
+  .drylbl{font-size:15px;font-weight:700;letter-spacing:1.4px;color:var(--mute);
+          margin-top:26px}
+  .lane{flex:1 1 0;display:flex;flex-direction:column}
+  .conn{display:grid;grid-template-columns:213px 34px 212.5px 34px 343.5px 40px 300px;height:90px}
+  .c-col{display:flex;flex-direction:column;align-items:center;justify-content:flex-start}
+  .vcap{font-size:11.5px;color:var(--wet);line-height:1.35;text-align:center;margin-top:4px;
+        white-space:nowrap}
+  .wetrow{display:grid;grid-template-columns:213px 34px 212.5px 34px 343.5px 40px 300px}
+  .wbox{border:2px solid var(--wet);border-radius:9px;background:#f2f8f5;
+        padding:12px 13px;display:flex;flex-direction:column;gap:5px;min-height:92px}
+  .wbox b{font-size:14.5px;color:#215c46}
+  .wbox span{font-size:12.5px;color:#3f6d5c;line-height:1.45}
+  .wbox.fut{border-style:dashed;background:#fbfdfc}
+  .warr{display:flex;align-items:center;justify-content:center}
+  .warr:before{content:"";border-left:9px solid var(--wet);border-top:5px solid transparent;
+    border-bottom:5px solid transparent;margin-left:4px}
+  .wetcap{font-size:13px;color:#3f6d5c;margin-top:11px;padding-left:2px}
+  .vdown,.vup{width:0;border-left:1.6px solid var(--wet);height:52px;position:relative}
+  .vdown:after{content:"";position:absolute;bottom:-1px;left:-5px;
+    border-top:9px solid var(--wet);border-left:5px solid transparent;
+    border-right:5px solid transparent}
+  .vup:after{content:"";position:absolute;top:-1px;left:-5px;
+    border-bottom:9px solid var(--wet);border-left:5px solid transparent;
+    border-right:5px solid transparent}
+  .elbowH{position:absolute;bottom:170px;left:100%;width:190px;
+          border-top:1.6px solid var(--wet)}
+  .elbowV{position:absolute;bottom:-90px;left:calc(100% + 188.4px);height:260px;
+          width:0;border-left:1.6px solid var(--wet)}
+  .elbowV:after{content:"";position:absolute;bottom:-1px;left:-5px;
+    border-top:9px solid var(--wet);border-left:5px solid transparent;
+    border-right:5px solid transparent}
+  .elbowL{position:absolute;bottom:178px;left:calc(100% + 14px);
+          font-size:11.5px;color:var(--wet);white-space:nowrap}
+  b{font-weight:700}
+</style></head><body>
+
+<h1>Four DBTL cycles</h1>
+<div class="sub">Every cycle was closed by a check the model failed or passed, not by a new assumption.
+Cycles 1–3 ran before any wet data existed.</div>
+
+<div class="drylbl">DRY — the model</div>
+<div class="row">
+  <div class="card c1">
+    <div class="tag">CYCLE 1</div><div class="ttl">Monomers only</div>
+    <div class="lbl">ASKED</div>
+    <div class="txt">Can cytoplasm ⇌ membrane monomer alone explain polar DivIVA?</div>
+    <div class="lbl">DID</div>
+    <div class="txt">Curvature put into the binding rate <i>k</i><sub>on</sub>, fitted to 2.2× enrichment.</div>
+    <div class="learn l1"><div class="lbl">✗ LEARNED</div>
+      <div class="txt">Rejected: needs <b>231×</b> the energy a monomer has; FRAP out by <b>242–611×</b>.</div></div>
+  </div>
+
+  <div class="arrow"><div class="cap">not monomers<br>but clusters</div><div class="shaft"></div></div>
+
+  <div class="card c2">
+    <div class="tag">CYCLE 2</div><div class="ttl">Add the cluster field</div>
+    <div class="lbl">ASKED</div>
+    <div class="txt">Does a third, immobile field fix all three failures at once?</div>
+    <div class="lbl">DID</div>
+    <div class="txt">C ⇌ M → N, with curvature moved into the cluster lifetime <i>k</i><sub>off,n</sub>(<i>z</i>).</div>
+    <div class="learn l2"><div class="lbl">✓ LEARNED</div>
+      <div class="txt">0.863 <i>k</i><sub>B</sub><i>T</i> per cluster = <b>92 molecules</b> (measured mean 47, max 1198). FRAP becomes biphasic.</div></div>
+  </div>
+
+  <div class="arrow"><div class="cap">a model to<br>test PopZ on</div><div class="shaft"></div></div>
+
+  <div class="card c3">
+    <div class="tag">CYCLE 3</div><div class="ttl">Judge the two strategies</div>
+    <div class="lbl">ASKED</div>
+    <div class="txt">Occupancy (S1) or local degradation (S2)?</div>
+    <div class="lbl">DID</div>
+    <div class="txt">PopZ as a static profile φ(<i>z</i>): S1 lowers <i>k</i><sub>on</sub>, S2 adds <i>k</i><sub>cut</sub>φ<i>M</i>.</div>
+    <div class="learn l3"><div class="lbl">✓ LEARNED</div>
+      <div class="txt"><b>S1.</b> S2 needs <b>&gt;99%</b> of all DivIVA degraded; S1 only needs to block <b>35% of binding</b> at the PopZ pole for 2×.</div></div>
+  </div>
+
+  <div class="arrow"><div class="cap">re-judge with<br>real numbers</div><div class="shaft"></div></div>
+
+  <div class="card c4">
+    <div class="tag">CYCLE 4</div><div class="ttl">Calibrate, then re-judge</div>
+    <div class="lbl">ASKED</div>
+    <div class="txt">How far can the numbers we handed over be trusted?</div>
+    <div class="lbl">DID</div>
+    <div class="txt">Forward model: projection → PSF 0.87 µm → pixels; <i>L</i> and <i>p</i> refitted to the images.</div>
+    <div class="learn l4"><div class="lbl">✓ LEARNED</div>
+      <div class="txt"><b>72%</b> of the predicted localization strength appeared; verdict unchanged. But <i>p</i> came out lower than assumed (θ 0.50 → <b>0.70</b>), so the design now has <b>two handles: θ (PopZ) and p (DivIVA)</b>.</div></div>
+    <div class="elbowL">what to tune next</div>
+    <div class="elbowH"></div><div class="elbowV"></div>
+  </div>
+</div>
+
+<div class="lanewrap">
+  <div class="lanegap"><div class="wetlbl"><span class="t">WET LAB — what was actually built</span><div class="r"></div></div></div>
+  <div class="lane">
+
+    <div class="conn">
+      <div class="c-col"><div class="vdown"></div><div class="vcap">hands over the strategy</div></div>
+      <div></div><div></div><div></div>
+      <div class="c-col"><div class="vup"></div><div class="vcap">the measurements</div></div>
+      <div></div><div></div>
+    </div>
+
+    <div class="wetrow">
+      <div class="wbox"><b>Strategy fixed</b><span>S1 occupancy; S2 never built</span></div>
+      <div class="warr"></div>
+      <div class="wbox"><b>PopZ designed &amp; built</b><span>two versions: with / without TM fusion</span></div>
+      <div class="warr"></div>
+      <div class="wbox"><b>Expressed, imaged, measured</b><span>5 IPTG levels, 460 cells</span></div>
+      <div class="warr"></div>
+      <div class="wbox fut"><b>Next design</b><span>push on both θ and p</span></div>
+    </div>
+
+    <div class="wetcap">DivIVA-mCherry and DivIVA-GFP, ± PopZ — <b>the S2 condition was never built</b></div>
+  </div>
+</div>
+
+</body></html>

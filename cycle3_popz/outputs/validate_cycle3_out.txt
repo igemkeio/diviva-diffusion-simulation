@@ -1,0 +1,51 @@
+==============================================================================
+VALIDATION - Cycle 3 (PopZ)
+==============================================================================
+
+  -- V0 cycle 2 validation first (13 items) --
+  V0 cluster.validate() OK
+  VP0 fine contour A matches model.geometry: rel 0.0e+00 OK
+  VP1 total contour arc length 3.456637053 vs analytic 3.456637061 (rel 2.4e-09, sqrt(eps) 限界) OK
+  VP1 arc(r=R*pi/2) profile equals cap profile: max diff 0.0e+00 OK
+  VP2 r_popz=150nm covers 0.0696 of pole cap (analytic 0.0695, rel 1.1e-03) OK
+  VP2 r_popz=250nm covers 0.1892 of pole cap (analytic 0.1890, rel 8.6e-04) OK
+  VP2 r_popz=350nm covers 0.3591 of pole cap (analytic 0.3590, rel 2.3e-04) OK
+
+  -- VB 収支検算（設計判断 [P1]）--
+  VB1a closed system (mu=0, no cut): d(total)/dt = -1.060e-11, rel 2.0e-16 OK
+  VB1b mu>0, no cut: budget identity rel err 2.3e-16 OK
+  VB1c mu>0 + cut (M): budget identity rel err 2.2e-16 OK
+  VB1d mu>0 + cut (M+N): budget identity rel err 2.2e-16 OK
+  VB2a trajectory budget, closed: rel 2.8e-12 (total/N 1.000000) OK
+  VB2b trajectory budget, mu>0: rel 5.3e-12 (total/N 1.000000) OK
+  VB2c trajectory budget, cut on: rel 1.5e-12 (total/N 0.6902, cut 1001.8 molecules) OK
+  VB2d cut actually removes molecules: D = 1001.81 (total/N 0.6902) OK
+  VB3 mu>0, no cut: steady total/N = 1.0000000001 (dev 5.0e-11) OK
+
+  -- VR cycle 2 への回帰 --
+  VR1 cluster enrichment: 2.47800586 vs cycle2 2.47800586 (rel 0.0e+00) OK
+  VR1 pole fraction: 0.66076016 vs cycle2 0.66076016 (rel 0.0e+00) OK
+  VR1 membrane enrichment: 1.41504788 vs cycle2 1.41504788 (rel 0.0e+00) OK
+  VR1 f_clu: 0.19780220 vs cycle2 0.19780220 (rel 0.0e+00) OK
+  VR2 theta=0: conventions agree (rel 0.0e+00) OK
+  VR3 theta=0.9 matches cycle2 block: 15.8733x vs 15.8733x (rel 0.0e+00) OK
+
+  -- VJ / VG 数値 --
+  VJ analytic jac vs FD (cut M): rel 1.7e-10 OK
+  VJ analytic jac vs FD (cut M+N, block_grow): rel 1.7e-10 OK
+  VS steady 9.4402x vs integration T=1e5 9.4402x (rel 1.9e-13, residual 8.6e-13) OK
+  VG0 n=105 puts pole boundary on a cell edge OK
+  VG0 n=210 puts pole boundary on a cell edge OK
+  VG0 n=420 puts pole boundary on a cell edge OK
+  VGa theta=0.8 monotone: 9.2042 -> 9.1409 -> 9.1249 OK
+  VGb theta=0.8 convergence rate 3.97 (2nd order = 4) OK
+  VGc theta=0.8 last change 0.17%, Richardson 9.1196 OK
+  VGa theta=0.98 monotone: 25.6292 -> 25.1727 -> 25.0588 OK
+  VGb theta=0.98 convergence rate 4.01 (2nd order = 4) OK
+  VGc theta=0.98 last change 0.45%, Richardson 25.0208 OK
+  VT staged integration matches sustained at t_release: 16.3772 vs 16.3772 (rel 0.0e+00) OK
+  VP3 p=0.5: steady independent of path (16.3839/16.3839/16.3839, rel 5.0e-08) OK
+==============================================================================
+all passed
+==============================================================================
+EXIT=0
